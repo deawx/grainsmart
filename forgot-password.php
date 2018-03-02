@@ -15,9 +15,9 @@ include 'partials/head.php';?>
 
 	<?php
 	if(isset($_SESSION['current_user'])) {
-		echo '<h1>HELLO WORLD!</h1>' . $_SESSION['current_user'];
+		echo '<h1>HELLO WORLD!</h1>';
 	} else {
-		// header('location: login.php');
+		echo 'Please login';
 	}
 
 	?>

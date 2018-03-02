@@ -63,7 +63,10 @@ include 'partials/head.php';?>
 	<!-- main footer -->
 	<?php include 'partials/main_footer.php'; ?>
 
-	<?php include 'partials/foot.php'; 
+	<?php include 'partials/foot.php';
+
+	mysqli_close($conn);
+	 
 	?>
 
 	<script type="text/javascript">

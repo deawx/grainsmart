@@ -13,9 +13,9 @@ include 'partials/head.php';?>
 	<!-- main header -->
 	<?php include 'partials/main_header.php'; ?>
 
-	<div class="container">
+<!-- 	<div class="container"> -->
 		<div class="row">
-			<div class="col-lg-6 col-md-6 col-centered">
+			<div class="col-lg-6 col-md-6 col-sm-8 col-centered">
 				<div class="panel panel-default">	
 					<div class="panel-heading"><h4>Sign up</h4></div>
 						<div class="panel-body">
@@ -92,7 +92,7 @@ include 'partials/head.php';?>
 									<textarea class="form-control" rows="3" name="address" id="address" required></textarea>
 								</div>	 -->	
 
-								<button type="submit" name="login" class="btn btn-green btn-block" id="registerBtn">Register</button>
+								<button type="submit" name="login" class="btn btn-green btn-block" id="registerBtn" disabled>Register</button>
 
 							</form>
 						</div>
@@ -102,7 +102,7 @@ include 'partials/head.php';?>
 				</div>					
 			</div>
 		</div> <!-- //.row -->
-	</div> <!-- //.container -->
+<!-- 	</div> --> <!-- //.container -->
 
 	<!-- main footer -->
 	<?php include 'partials/main_footer.php'; ?>
@@ -111,6 +111,7 @@ include 'partials/head.php';?>
 
 	<script type="text/javascript">
 		$(document).ready(function(){
+
 			$('#first_name').keyup(function(){
 				var regexp = new RegExp(/^[a-zA-Z .]+$/);
 				if(regexp.test($('#first_name').val())) {
@@ -137,6 +138,7 @@ include 'partials/head.php';?>
 					$('#sms').closest('.form-group').removeClass('has-error');
 					$('#sms').closest('.form-group').addClass('has-success');
 					$('[for="sms"]').html('<span style="color:green;">Valid</span> Mobile Number');
+					$('#registerBtn').prop('disabled', false);
 				} else {
 					$('#sms').closest('.form-group').addClass('has-error');
 					$('[for="sms"]').html('<span style="color:red;">Invalid</span> Mobile Number');
@@ -150,6 +152,7 @@ include 'partials/head.php';?>
 					$('#email').closest('.form-group').addClass('has-success');
 				} else {
 					$('#email').closest('.form-group').addClass('has-error');
+					// $('#registerBtn').prop('disabled', true);
 				}
 			})
 
@@ -158,22 +161,27 @@ include 'partials/head.php';?>
 				if(regexp.test($('#password').val())) {
 					$('#password').closest('.form-group').removeClass('has-error');
 					$('#password').closest('.form-group').addClass('has-success');
+
 				} else {
 					$('#password').closest('.form-group').addClass('has-error');
+					$('#registerBtn').prop('disabled', true);
 				}
 			})
 
-			$('#confirmPassword').keyup(function(){
+			$('#confirmPassword').on('input', function(){
 				var regexp = new RegExp(/^[a-zA-Z0-9._@#$%^&+=*]{6,50}$/);
 				if(regexp.test($('#confirmPassword').val())) {
 					if($('#confirmPassword').val() == $('#password').val()) {
 					$('#confirmPassword').closest('.form-group').removeClass('has-error');
 					$('#confirmPassword').closest('.form-group').addClass('has-success');
+					$('#registerBtn').prop('disabled', false);
 					} else {
 						$('#confirmPassword').closest('.form-group').addClass('has-error');
+						$('#registerBtn').prop('disabled', true);
 					}
 				} else {
 					$('#confirmPassword').closest('.form-group').addClass('has-error');
+					$('#registerBtn').prop('disabled', true);
 				}
 			})
 
@@ -215,6 +223,8 @@ include 'partials/head.php';?>
 					$('[for="confirmPassword"]').html('Password');	
 				}		
 			}
+
+
 		})
 	</script>
 </body>

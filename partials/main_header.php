@@ -4,7 +4,7 @@
       <?php
         if (isset($_SESSION['current_user'])) {
           echo '
-            <li class="navbar-login">
+            <li class="navbar-login" id="welcome-nav">
              <a href="profile.php"> Hello, ' . ucfirst($_SESSION['current_user']) . '!</a>
             </li>
           ';

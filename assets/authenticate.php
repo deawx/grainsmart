@@ -19,7 +19,7 @@ if (mysqli_num_rows($result) > 0) {
     if ($email == $customer['email'] && $password == $customer['password']) {
         $isLogInSuccessful = true;
         $_SESSION['current_user'] = $customer['first_name'];
-        //$_SESSION['role'] = $customer['description'];
+        $_SESSION['email'] = $customer['email'];
     }
 }
 
