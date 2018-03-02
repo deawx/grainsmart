@@ -1,0 +1,145 @@
+.col-centered {
+	float: none;
+	margin: 0 auto;
+}
+
+.addon-dif-color {
+	color: #064B27;
+}
+
+/* CSS Colors */
+.dark-green {
+	color: #064B27 !important;
+}
+
+.btn-green {
+	background-color: #064B27 !important;
+	color: #fff;
+}
+
+.btn-green:hover {
+	color: #FFD100 !important;
+} 
+
+.gold {
+	color: #FFD100 !important;
+}
+
+.btn-gold {
+	background-color: #FFD100 !important;
+	color: #064B27 !important;
+}
+
+.btn-gold:hover {
+	background-color: #fff !important;
+	border: 1px solid #FFD100;
+	color: #FFD100 !important;
+}
+
+/* Navbar */
+
+#horizontal-greenbar {
+	/*border: 3px solid green;*/
+	background-color: #03A852;
+	width: 100%;
+	height: 30px;
+
+}
+
+#horizontal-greenbar ul {
+	float: right;
+	color: #fff;
+}
+
+#horizontal-greenbar li {
+	padding: 5px 0;
+	padding-right: 50px; 
+}
+
+#horizontal-greenbar a {
+	padding: 0;
+	color: inherit;
+}
+
+.navbar {
+	background-color: white;
+}
+
+.navbar-brand {
+	padding: 0px;
+}
+
+.navbar-brand>img {
+	height: 100%;
+	padding-left: 15px;
+	width: auto;
+}
+
+#center-menu li {
+	float: none;
+	display: inline-block;
+}
+
+#center-menu {
+	width: 100%;
+	text-align: center;
+}
+
+@media (max-width: 767px) {
+	.navbar-brand>img {
+		height: 100%;
+		padding-left: 10px;
+		padding-top: 5px;
+		width: auto;
+	}
+
+	#horizontal-greenbar ul {
+		float: none;
+		margin-top: 0 !important;
+	}
+
+	.navbar-login {
+		float: right;
+	}
+
+	.navbar-icons {
+		float: none;
+		display: none !important;
+	}	
+}
+
+/* Log In Form */
+
+
+/* Footer */
+
+.main-footer {
+	position: relative;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: #064B27;
+	color: #eee;
+	padding: 3px;
+	text-align: center;
+}
+
+.main-footer p {
+	margin-bottom: 0;
+}
+
+/* Products Page */
+table, th {
+	text-align: center;
+}
+
+th,
+tr,
+td {
+/*	padding: 10px;
+	border: 1px solid black;*/
+}
+
+tr:hover {
+	background-color: #FFEC99 !important;
+}
