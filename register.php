@@ -13,14 +13,14 @@ include 'partials/head.php';?>
 	<!-- main header -->
 	<?php include 'partials/main_header.php'; ?>
 
-<!-- 	<div class="container"> -->
+	<div class="container-fluid">
 		<div class="row">
 			<div class="col-lg-6 col-md-6 col-sm-8 col-centered">
 				<div class="panel panel-default">	
 					<div class="panel-heading"><h4>Sign up</h4></div>
 						<div class="panel-body">
 
-							<form method="post" id="registrationForm" action="assets/registration.php">
+							<form method="post" id="registrationForm" action="assets/registration.php" onsubmit="return validateForm()">
 								<div class="row">
 									<div class="form-group col-lg-6 col-md-6">
 										<label for="first_name">First Name</label>
@@ -92,7 +92,7 @@ include 'partials/head.php';?>
 									<textarea class="form-control" rows="3" name="address" id="address" required></textarea>
 								</div>	 -->	
 
-								<button type="submit" name="login" class="btn btn-green btn-block" id="registerBtn" disabled>Register</button>
+								<input type="submit" name="login" class="btn btn-green btn-block" id="registerBtn" value="Register"></input>
 
 							</form>
 						</div>
@@ -102,7 +102,7 @@ include 'partials/head.php';?>
 				</div>					
 			</div>
 		</div> <!-- //.row -->
-<!-- 	</div> --> <!-- //.container -->
+	</div> <!-- //.container -->
 
 	<!-- main footer -->
 	<?php include 'partials/main_footer.php'; ?>
@@ -110,6 +110,11 @@ include 'partials/head.php';?>
 	<?php include 'partials/foot.php'; ?>
 
 	<script type="text/javascript">
+		var fname = false;
+		var lname = false;
+		var sms = false;
+		var email = false;
+
 		$(document).ready(function(){
 
 			$('#first_name').keyup(function(){
@@ -117,8 +122,10 @@ include 'partials/head.php';?>
 				if(regexp.test($('#first_name').val())) {
 					$('#first_name').closest('.form-group').removeClass('has-error');
 					$('#first_name').closest('.form-group').addClass('has-success');
+					fname = true;
 				} else {
 					$('#first_name').closest('.form-group').addClass('has-error');
+					fname = false;
 				}
 			})
 
@@ -127,8 +134,10 @@ include 'partials/head.php';?>
 				if(regexp.test($('#last_name').val())) {
 					$('#last_name').closest('.form-group').removeClass('has-error');
 					$('#last_name').closest('.form-group').addClass('has-success');
+					lname = true;
 				} else {
 					$('#last_name').closest('.form-group').addClass('has-error');
+					lname = false;
 				}
 			})
 
@@ -138,10 +147,11 @@ include 'partials/head.php';?>
 					$('#sms').closest('.form-group').removeClass('has-error');
 					$('#sms').closest('.form-group').addClass('has-success');
 					$('[for="sms"]').html('<span style="color:green;">Valid</span> Mobile Number');
-					$('#registerBtn').prop('disabled', false);
+					sms = true;
 				} else {
 					$('#sms').closest('.form-group').addClass('has-error');
 					$('[for="sms"]').html('<span style="color:red;">Invalid</span> Mobile Number');
+					sms = false;
 				}
 			})
 
@@ -150,21 +160,22 @@ include 'partials/head.php';?>
 				if(regexp.test($('#email').val())) {
 					$('#email').closest('.form-group').removeClass('has-error');
 					$('#email').closest('.form-group').addClass('has-success');
+					email = true;
 				} else {
 					$('#email').closest('.form-group').addClass('has-error');
-					// $('#registerBtn').prop('disabled', true);
+					email = false;
 				}
 			})
 
-			$('#password').keyup(function(){
+			$('#password').on('input', function(){
 				var regexp = new RegExp(/^[a-zA-Z0-9._@#$%^&+=*]{6,50}$/);
 				if(regexp.test($('#password').val())) {
 					$('#password').closest('.form-group').removeClass('has-error');
 					$('#password').closest('.form-group').addClass('has-success');
-
+					confirmPass();
 				} else {
 					$('#password').closest('.form-group').addClass('has-error');
-					$('#registerBtn').prop('disabled', true);
+					confirmPass();
 				}
 			})
 
@@ -174,21 +185,15 @@ include 'partials/head.php';?>
 					if($('#confirmPassword').val() == $('#password').val()) {
 					$('#confirmPassword').closest('.form-group').removeClass('has-error');
 					$('#confirmPassword').closest('.form-group').addClass('has-success');
-					$('#registerBtn').prop('disabled', false);
+					$('[for="confirmPassword"]').html('Password <span style="color:green;">match!</span>');
 					} else {
 						$('#confirmPassword').closest('.form-group').addClass('has-error');
-						$('#registerBtn').prop('disabled', true);
+						$('[for="confirmPassword"]').html('Password <span style="color:red;">not match!</span>');
 					}
 				} else {
 					$('#confirmPassword').closest('.form-group').addClass('has-error');
-					$('#registerBtn').prop('disabled', true);
+					$('[for="confirmPassword"]').html('Password <span style="color:red;">not match!</span>');
 				}
-			})
-
-			$('#registerBtn').click(function(event){
-				// event.preventDefault();
-				var formData = $('#registrationForm').serialize();
-				console.log(formData);
 			})
 
 			$('#password').on('input', function(){
@@ -199,33 +204,43 @@ include 'partials/head.php';?>
 				}
 			});
 
-			$('#confirmPassword').on('input', matchPassword);
-			
-			function matchPassword() {
-				var passwordText = $('#password').val();
-				var confirmPasswordText = $('#confirmPassword').val();
-
-					// if ($('#password').val() == $(this).val()) {
-					// 	$('[for="confirmPassword"]').html('Password <span style="color:green;">match!</span>');	
-					// } else {
-					// 	$('[for="confirmPassword"]').html('Password <span style="color:red;">not match!</span>');	
-					// }
-
-				if (passwordText != '' || confirmPasswordText != '') {
-					if (passwordText == confirmPasswordText) {
-						// console.log('matched');
-						$('[for="confirmPassword"]').html('Password <span style="color:green;">match!</span>');	
-					} else {
-						// console.log('mismatched');
-						$('[for="confirmPassword"]').html('Password <span style="color:red;">not match!</span>');	
-					}
-				} else {
-					$('[for="confirmPassword"]').html('Password');	
-				}		
+			function confirmPass() {
+				$('[for="confirmPassword"]').html('Confirm Password');
+				$('#confirmPassword').closest('.form-group').removeClass('has-error');
+				$('#confirmPassword').closest('.form-group').removeClass('has-success');
+				$('#confirmPassword').val('');
 			}
 
-
 		})
+
+		function validateForm() {
+			var x = true;
+
+			if(!fname) {
+				alert('Input valid first name!');
+				x = false;
+			}
+			if(!lname) {
+				alert('Input valid last name!');
+				x = false;	
+			}
+			if(!email) {
+				alert('Input valid email!');
+				x = false;
+			}
+			if($('#confirmPassword').val() != $('#password').val()) {
+				alert('Input correct password!');
+				x = false;
+			}
+			if(!sms) {
+				alert('Input valid mobile number!');
+				x = false;
+			} else {
+				alert('Congratulations!');
+			}
+
+			return x;
+		}
 	</script>
 </body>
 </html>
