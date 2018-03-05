@@ -7,7 +7,7 @@ require '../connect.php';  // Create a database connection
 $email = $_POST['email'];
 $password = sha1($_POST['password']);
 
-$sql = "SELECT c.email, c.password, c.first_name FROM customers c WHERE c.email='$email'";
+$sql = "SELECT email, password, first_name FROM customers WHERE email='$email'";
 
 $result = mysqli_query($conn, $sql);
 
@@ -18,14 +18,14 @@ if (mysqli_num_rows($result) > 0) {
 
     if ($email == $customer['email'] && $password == $customer['password']) {
         $isLogInSuccessful = true;
-        $_SESSION['current_user'] = $customer['first_name'];
+        $_SESSION['login_user'] = $customer['first_name'];
         $_SESSION['email'] = $customer['email'];
     }
 }
 
 if ($isLogInSuccessful) {
     // if successful login
-    header('location: ../index.php');
+    header('location: ../home.php');
 } else {
     // if failed login
     header('location: ../register.php');

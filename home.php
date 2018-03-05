@@ -21,6 +21,17 @@ $_SESSION['item_count'] = 0;
 	<!-- main header -->
 	<?php include 'partials/main_header.php'; ?>
 
+	<?php
+	if(isset($_SESSION['login_user'])) {
+		echo '<h1>HELLO WORLD!</h1>' . $_SESSION['login_user'];
+	} else {
+		// header('location: login.php');
+	}
+
+
+
+	?>
+
 	<!-- main footer -->
 	<?php include 'partials/main_footer.php'; ?>
 

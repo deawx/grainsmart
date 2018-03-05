@@ -58,7 +58,7 @@ include 'partials/head.php';?>
 	</div> <!-- //.container -->
 
 	<!-- main footer -->
-	<!-- <?php include 'partials/main_footer.php'; ?> -->
+	<?php include 'partials/main_footer.php'; ?>
 
 	<?php include 'partials/foot.php'; ?>
 </body>

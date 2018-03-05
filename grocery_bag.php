@@ -3,16 +3,10 @@
 session_start(); 
 
 function getTitle() {
-	echo 'Homepage';
+	echo 'Grocery Bag';
 }
 
 include 'partials/head.php';
-
-// create session variable
-$_SESSION['cart'] = array();
-
-// create session variable for item counter
-$_SESSION['item_count'] = 0;
 
 ?>
 
@@ -20,6 +14,13 @@ $_SESSION['item_count'] = 0;
 <body>
 	<!-- main header -->
 	<?php include 'partials/main_header.php'; ?>
+
+	<?php
+	
+	var_dump($_SESSION['cart']);
+
+
+	?>
 
 	<!-- main footer -->
 	<?php include 'partials/main_footer.php'; ?>

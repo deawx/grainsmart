@@ -1,91 +1,122 @@
 <?php
 
-session_start();
+session_start(); 
 
-require 'connect.php'; 
+require 'connect.php';
 
 function getTitle() {
-	echo 'Products';
+	echo 'Shopping';
 }
 
 include 'partials/head.php';?>
 
 </head>
 <body>
+
 	<!-- main header -->
 	<?php include 'partials/main_header.php'; ?>
-
-	<table class="table table-striped">
-		<th>Product Name</th>
-		<th>Stock Price</th>
-		<th>Retail Price</th>
-		<th>Stocks on Hand (Per Kilo)</th>
-		<th>Action</th>
 	
 	<?php
 	$sql = "select * from products";				
 	$result = mysqli_query($conn, $sql);
 
-	//var_dump($result);
+	// $array = array();
 
-	while ($product = mysqli_fetch_assoc($result)) {
-		extract($product);
-		echo '
-		<tr>
-			<td><a href="item.php?id='.$name.'">' . $name . '</a></td>
-			<td>PHP '. $stock_price .'</td>
-			<td>PHP '. $price_retail .'</td>
-			<td>'. $stocks_onhand .' kgs </td>
-			<td> <button type="button" class="btn btn-default btn-sm btn-info editProduct" data-toggle="modal" data-target="#editProductModal" data-index="'.$id.'"><span class="glyphicon glyphicon-cog"></span></button>
-				<button type="button" class="btn btn-default btn-sm btn-danger"><span class="glyphicon glyphicon-remove"></span></button></td>
-		</tr>
-		';
+	// while($products = mysqli_fetch_array($result)){
+	// 	$array[] = $products['category_id'];
+	// }
+
+	// $categories = array_unique($array);
+	// sort($categories);
+	// var_export($categories);
+
+	if (isset($_GET['category']) && $_GET['category']!='All') {
+	$cat = $_GET['category'];
+
+	if($cat=='Rice') {
+		$query = "WHERE category_id = 1";
+	} else if ($cat=='Meat') {
+		$query = "WHERE category_id = 2";
+	} else if ($cat=='Price: Low to High') {
+		$query = "ORDER BY price_retail";
+	} else if ($cat=='Price: High to Low') {
+		$query = "ORDER BY price_retail DESC";
 	}
 
-	?>
-	</table>
+	} else {
+		$query = "";
+	}
 
-	<!-- Modal -->
-	<div class="modal fade" id="editProductModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-	  <div class="modal-dialog modal-dialog-centered" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h5 class="modal-title">Do you want to edit Malagkit?</h5>
-	      </div>
-	      <div class="modal-body" id="editProductModalBody">
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-	        <button type="button" class="btn btn-primary">Save changes</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
+	$sort = array("0"=>"Price: Low to High", "1"=>"Price: High to Low", "2"=>"Rice", "3"=>"Meat");
+	?>
+
+	<form method="GET" id="myForm">	
+		<select class="form-control" name="category" onchange="myForm()">
+			<option>All</option>
+			<?php
+				foreach ($sort as $key => $value) {
+
+					if ($value==$_GET['category']) {
+						echo '<option selected>'.$value.'</option>';	
+					} else {
+						echo '<option>'.$value.'</option>';
+					}
+				}		
+			?>
+		</select>
+	</form>
+
+	
+	
+	<?php
+	$sql = "select * from products $query";				
+	$result = mysqli_query($conn, $sql);
+	while($product = mysqli_fetch_assoc($result)){
+		extract($product);
+		echo '<div class="card" style="width: 20rem; display: inline-block;">
+			<img class="img-responsive" src="'.$product_image.'">
+			<div class="card-block">
+			<h4 class="card-title"><strong>'.$name.'</strong></h4>
+			<div class="card-text">PHP '.$price_retail.'</div>
+			<div><input id="itemQuantity'.$id.'" type="text" name="quantity" value="1" size="2" /><input type="submit" value="Add to cart" class="btnAddAction" onclick="addToCart('.$id.')"/></div>
+			</div>
+		</div>';
+	}
+	?>
 
 	<!-- main footer -->
+	
 	<?php include 'partials/main_footer.php'; ?>
 
 	<?php include 'partials/foot.php';
+		  mysqli_close($conn);
+	 ?>
 
-	mysqli_close($conn);
-	 
-	?>
+	 <script type="text/javascript">
+	 	function myForm(){
+	 		document.getElementById('myForm').submit();
+	 	}
 
-	<script type="text/javascript">
-		$(document).ready(function(){
-			$('.editProduct').on('click', function(){
-				var productID = $(this).data('index');
-				
-				$.get('assets/edit_product.php',
-					{
-						id: productID
-					},
-					function(data, status) {
-						$('#editProductModalBody').html(data);
-						// alert(data);
-					});
-			});
-		});
-	</script>
+	 	function addToCart(itemId) {
+	 		// console.log(itemId);
+	 		var id = itemId;
+
+	 		// retrieve value of item quantity
+	 		var quantity = $('#itemQuantity' + id).val();
+	 		// console.log(quantity);
+
+	 		// create a post request to update session cart variable
+	 		$.post('assets/add_to_cart.php',
+	 			{
+	 				item_id: id,
+	 				item_quantity: quantity 
+	 			},
+	 			function(data, status) {
+	 				console.log(data);
+	 				$('.badge').html(data);
+	 			});
+
+	 	}
+	 </script>
 </body>
 </html>
