@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+session_start(); 
 
 function getTitle() {
 	echo 'Register';

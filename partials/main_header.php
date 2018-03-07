@@ -2,23 +2,23 @@
   <div id="horizontal-greenbar" class="wrapper">
     <ul class="nav navbar-nav">
       <?php
-        if (isset($_SESSION['login_user'])) {
-          echo '
-            <li class="navbar-login" id="welcome-nav">
-             <a href="profile.php"> Hello, ' . ucfirst($_SESSION['login_user']) . '!</a>
-            </li>
-            <li><a href="grocery_bag.php">My Cart <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-          ';
-
-          if (isset($_SESSION['item_count'])) {
+        // if (isset($_SESSION['login_user']) || $_SESSION['item_count']!=0) {
+            if (isset($_SESSION['login_user'])){
             echo '
+              <li class="navbar-login" id="welcome-nav">
+               <a href="profile.php"> Hello, ' . ucfirst($_SESSION['login_user']) . '!</a>
+              </li>
+            ';
+          }
+            echo '
+            <li><a href="grocery_bag.php">My Cart <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
             <strong style="color:red;" class="badge">'.$_SESSION['item_count'].'</strong>
             </a></li>';
-          }
-        } else {
-          echo '<li class="navbar-icons"><a href="#"><span class="glyphicon glyphicon-envelope gold" aria-hidden="true"></span> grainsmart.cainta@gmail.com</a></li>
-      <li class="navbar-icons"><a href="#"><span class="glyphicon glyphicon-earphone gold" aria-hidden="true"></span> +63.917.632.3441</a></li>';
-        }
+          
+      //   } else {
+      //     echo '<li class="navbar-icons"><a href="#"><span class="glyphicon glyphicon-envelope gold" aria-hidden="true"></span> grainsmart.cainta@gmail.com</a></li>
+      // <li class="navbar-icons"><a href="#"><span class="glyphicon glyphicon-earphone gold" aria-hidden="true"></span> +63.917.632.3441</a></li>';
+      //   }
 
       ?>
       

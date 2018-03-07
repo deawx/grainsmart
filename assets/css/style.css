@@ -153,7 +153,7 @@ td {
 	border: 1px solid black;*/
 }
 
-tr:hover {
+tbody>tr:hover {
 	background-color: #FFEC99 !important;
 }
 

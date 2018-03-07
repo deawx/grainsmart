@@ -16,12 +16,14 @@ include 'partials/head.php';?>
 	<?php include 'partials/main_header.php'; ?>
 
 	<table class="table table-striped">
+		<thead>
 		<th>Product Name</th>
 		<th>Stock Price</th>
 		<th>Retail Price</th>
 		<th>Stocks on Hand (Per Kilo)</th>
 		<th>Action</th>
-	
+		</thead>
+		<tbody>
 	<?php
 	$sql = "select * from products";				
 	$result = mysqli_query($conn, $sql);
@@ -43,6 +45,7 @@ include 'partials/head.php';?>
 	}
 
 	?>
+	</tbody>
 	</table>
 
 	<!-- Modal -->

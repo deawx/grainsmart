@@ -15,20 +15,22 @@ include 'partials/head.php';?>
 
 	<!-- main header -->
 	<?php include 'partials/main_header.php'; ?>
-	
+
 	<?php
-	$sql = "select * from products";				
-	$result = mysqli_query($conn, $sql);
+	// if (isset($_SESSION['login_user']) && !isset($_SESSION['order'])) {
+	// 	$customer_id = $_SESSION['customer_id'];
+	// 	$name = $_SESSION['login_user'] . ' ' . $_SESSION['last_name'];
+	// 	$sms = $_SESSION['sms'];
+	// 	$address = $_SESSION['address'];
 
-	// $array = array();
+	// $sql = "INSERT INTO `orders`(`id`, `customer_id`, `order_date`, `delivery_date`, `notes`, `name`, `contact_details`, `address`, `promotion_id`, `status_id`) VALUES (null, $customer_id, now(), null, null, $name, $sms, $address, 1, 1)";				
+	// $result = mysqli_query($conn, $sql);
 
-	// while($products = mysqli_fetch_array($result)){
-	// 	$array[] = $products['category_id'];
+	// $order = "SELECT * FROM orders";
+
+	// $_SESSION['order'];
+	
 	// }
-
-	// $categories = array_unique($array);
-	// sort($categories);
-	// var_export($categories);
 
 	if (isset($_GET['category']) && $_GET['category']!='All') {
 	$cat = $_GET['category'];
@@ -103,7 +105,7 @@ include 'partials/head.php';?>
 
 	 		// retrieve value of item quantity
 	 		var quantity = $('#itemQuantity' + id).val();
-	 		// console.log(quantity);
+	 		console.log(quantity);
 
 	 		// create a post request to update session cart variable
 	 		$.post('assets/add_to_cart.php',
@@ -112,8 +114,15 @@ include 'partials/head.php';?>
 	 				item_quantity: quantity 
 	 			},
 	 			function(data, status) {
+	 				
+ 					$('.badge').html(data);
 	 				console.log(data);
-	 				$('.badge').html(data);
+	 				// if(data == 'not') {
+	 				// 	window.location='login.php';
+	 				// } else {
+	 				// }			
+	 				
+
 	 			});
 
 	 	}

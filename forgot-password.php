@@ -17,7 +17,7 @@ include 'partials/head.php';?>
 	if(isset($_SESSION['current_user'])) {
 		echo '<h1>HELLO WORLD!</h1>';
 	} else {
-		echo 'Please login';
+		echo date("F j, Y - h:i:s A");
 	}
 
 	?>

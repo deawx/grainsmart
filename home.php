@@ -8,12 +8,6 @@ function getTitle() {
 
 include 'partials/head.php';
 
-// create session variable
-$_SESSION['cart'] = array();
-
-// create session variable for item counter
-$_SESSION['item_count'] = 0;
-
 ?>
 
 </head>
@@ -23,9 +17,10 @@ $_SESSION['item_count'] = 0;
 
 	<?php
 	if(isset($_SESSION['login_user'])) {
-		echo '<h1>HELLO WORLD!</h1>' . $_SESSION['login_user'];
+		$name = $_SESSION['login_user'] . ' ' . $_SESSION['last_name'];
+		echo '<h1>HELLO WORLD!</h1>' . $name;
 	} else {
-		// header('location: login.php');
+		// header('location: index.php');
 	}
 
 
