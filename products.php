@@ -52,6 +52,7 @@ include 'partials/head.php';?>
 	$sort = array("0"=>"Price: Low to High", "1"=>"Price: High to Low", "2"=>"Rice", "3"=>"Meat");
 	?>
 
+	<div class="container">
 	<form method="GET" id="myForm">	
 		<select class="form-control" name="category" onchange="myForm()">
 			<option>All</option>
@@ -75,7 +76,7 @@ include 'partials/head.php';?>
 	$result = mysqli_query($conn, $sql);
 	while($product = mysqli_fetch_assoc($result)){
 		extract($product);
-		echo '<div class="card" style="width: 20rem; display: inline-block;">
+		echo '<div class="card" style="width: 20rem; display: inline-block; margin:20px;">
 			<img class="img-responsive" src="'.$product_image.'">
 			<div class="card-block">
 			<h4 class="card-title"><strong>'.$name.'</strong></h4>
@@ -84,6 +85,8 @@ include 'partials/head.php';?>
 			</div>
 		</div>';
 	}
+
+	echo '</div>';
 	?>
 
 	<!-- main footer -->

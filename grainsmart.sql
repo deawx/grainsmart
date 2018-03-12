@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 07, 2018 at 09:53 AM
+-- Generation Time: Mar 12, 2018 at 02:31 PM
 -- Server version: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -50,6 +50,14 @@ CREATE TABLE `cart` (
   `product_id` int(11) NOT NULL,
   `quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`id`, `session_id`, `product_id`, `quantity`) VALUES
+(1, '391ca0c201d742df23f4fb2895fcb614', 3, 21),
+(2, '391ca0c201d742df23f4fb2895fcb614', 4, 2);
 
 -- --------------------------------------------------------
 
@@ -109,13 +117,9 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`id`, `email`, `password`, `first_name`, `last_name`, `sms`, `address`, `email_status`, `activation_code`, `token`, `date_created`) VALUES
-(1, 'lordvirgo31@yahoo.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'jeremy', 'rotoni', 2147483647, 'Cainta', 'not verified', '5af6169095b11e202aaf5eb01ca6a9b4', NULL, '0000-00-00'),
-(2, 'grainsmart.cainta@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'Monday', 'Ganda', 2147483647, 'Cainta', 'not verified', 'cd5d0114541d501c6f84f0e018a3b52b', NULL, '2018-01-03'),
-(3, 'vivaslindeyg@gmail.com', '67ae1fc6cdca2d42c82f34f5f86ec85898f6780e', 'Lindey', 'Vivas', 9178763509, 'Cainta', 'not verified', '9f342dd0fca9b5497d085e162f0ef349', NULL, '2018-03-03'),
-(4, 'j.jwkqjw@ya.co', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'j', 'j', 9999999999, 'Cainta', 'not verified', '2f83367ff54464cd0cc349bdc1f8fe37', NULL, '2018-04-03'),
-(5, 'q@o.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'q', 'q', 9198778879, 'Cainta', 'not verified', '4b9f4e01d6ace913459eb9e747a32e63', NULL, '2018-04-03'),
-(6, 'a@a.aa', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'a', 'a', 9178763508, 'Cainta', 'not verified', 'fc3c5f2b92a32768654fb62bb2783e7a', NULL, '2018-04-03'),
-(7, 'jeremy@yahoo.com', 'b3f594e10a9edcf5413cf1190121d45078c62290', 'jeremy', 'jeremy', 9222222223, 'Cainta', 'not verified', '12bab8138ec6c0fbe5a9031b945022f1', NULL, '2018-06-03');
+(1, 'jeremy.rotoni@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'Jeremy', 'Rotoni', 9176323441, 'Cainta', 'verified', 'df209593a0f2e7cb66518f99504e93f0', 'a0503df8f7a4d1d376b64c275121de64', '2018-12-03'),
+(2, 'lordvirgo31@yahoo.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'Jeremy', 'Rotoni', 9123132456, 'Cainta', 'verified', '6f01e1da1a66d6e6dd005ec43b75c277', '2f5030c6899bf2172e35cecbda0b4415', '2018-12-03'),
+(3, 'jcrotoni@up.edu.ph', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'Jeremy', 'Rotoni', 9123156123, 'Cainta', 'verified', 'f43ddcf5e32daa72f4021e1b2d7933ed', '1c6b87f3d8d9e7a5510431b7532e6b65', '2018-12-03');
 
 -- --------------------------------------------------------
 
@@ -300,10 +304,11 @@ CREATE TABLE `status` (
 --
 
 INSERT INTO `status` (`id`, `order_status`) VALUES
-(1, 'Processing'),
-(2, 'Shipping'),
-(3, 'Delivered'),
-(4, 'Cancelled');
+(1, 'For Confirmation'),
+(2, 'Processing'),
+(3, 'Shipping'),
+(4, 'Delivered'),
+(5, 'Cancelled');
 
 --
 -- Indexes for dumped tables
@@ -421,7 +426,7 @@ ALTER TABLE `attendance`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -439,7 +444,7 @@ ALTER TABLE `contributions`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `employee`
@@ -487,7 +492,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `status`
 --
 ALTER TABLE `status`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables

@@ -17,7 +17,7 @@ include 'partials/head.php';
 
 	<?php
 	if(isset($_SESSION['login_user'])) {
-		$name = $_SESSION['login_user'] . ' ' . $_SESSION['last_name'];
+		$name = $_SESSION['login_user'];
 		echo '<h1>HELLO WORLD!</h1>' . $name;
 	} else {
 		// header('location: index.php');

@@ -5,6 +5,12 @@ session_start();
 function getTitle() {
 	echo 'Register';
 }
+if (isset($_GET['msg'])) {
+	$message = $_GET['msg'];
+
+} else {
+	$message = '';
+}
 
 include 'partials/head.php';?>
 
@@ -18,6 +24,11 @@ include 'partials/head.php';?>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-lg-5 col-md-6 col-sm-8 col-centered">
+				<div id="validation-message">
+				    <?php
+				        echo '<div>'.$message.'</div>';
+				     ?>
+				</div>
 				<div class="panel panel-default">	
 					<div class="panel-heading"><h4>Sign up</h4></div>
 						<div class="panel-body">
