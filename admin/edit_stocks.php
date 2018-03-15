@@ -2,7 +2,7 @@
 
 session_start();
 
-require 'connect.php'; 
+require '../connect.php'; 
 
 function getTitle() {
 	echo 'Edit Stocks';
@@ -59,7 +59,7 @@ include 'partials/head.php';?>
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-	        <button type="button" class="btn btn-primary">Save changes</button>
+	        <button type="submit" class="btn btn-primary">Save changes</button>
 	      </div>
 	    </div>
 	  </div>

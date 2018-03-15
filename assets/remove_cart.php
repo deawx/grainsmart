@@ -11,7 +11,11 @@ mysqli_query($conn, $sql);
 $sql = "SELECT SUM(quantity) AS totalQuantity FROM cart WHERE session_id = '$session'";
 $result = mysqli_query($conn, $sql);
 $totalKgs = mysqli_fetch_assoc($result);
-$msg = $totalKgs['totalQuantity']. ' (kg)'; 
+if($totalKgs['totalQuantity']!='') {
+	$msg = $totalKgs['totalQuantity']. ' (kg)';
+} else {
+	$msg = '';
+}
 echo $msg;
 $_SESSION['item_count'] = $msg;
 

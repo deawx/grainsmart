@@ -18,12 +18,17 @@ if (mysqli_num_rows($result) > 0) {
     if ($email == $customer['email'] && $password == $customer['password']) {
         if($customer['email_status']=='not verified') {
            $_SESSION['emailcode'] = $email; 
-           header('location: ../activate_email.php?msg=Your email address has not been verified yet. Click resend link.');
+           header('location: ../activate_email.php?msg=<label class="text-danger">Your email address has not been verified yet. Click resend the code.</label>');
         } else {
             $isLogInSuccessful = true;
             $_SESSION['login_user'] = $customer['first_name'];
             $_SESSION['email'] = $customer['email'];
-            header('location: ../home.php'); 
+            $_SESSION['user_id'] = $customer['id'];
+            if(isset($_SESSION['checkout'])) {
+                header('location: ../checkout.php');
+            } else {
+                header('location: ../home.php'); 
+            }
         }
             
         // $_SESSION['last_name'] = $customer['last_name'];
@@ -34,7 +39,7 @@ if (mysqli_num_rows($result) > 0) {
         header('location: ../login.php?msg=<label class="text-danger">Incorrect password!</label>');
     }
 } else {
-    header('location: ../register.php?msg=Invalid email address! Register here!');
+    header('location: ../register.php?msg=<label class="text-danger">Invalid email address! Register here!</label>');
 }
 
 mysqli_close($conn);

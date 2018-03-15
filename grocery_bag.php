@@ -87,7 +87,7 @@ $totalAmount = 0;
 	 			function(data, status) {
 
  					$('.badge').html(data);
- 					if(data==' (kg)'){
+ 					if(data==''){
  						$('#cartIsEmpty').html('');
  						$('#cartIsEmpty').load(window.location.href +' #cartIsEmpty');
  					} else {

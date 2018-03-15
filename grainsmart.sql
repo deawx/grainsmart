@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 12, 2018 at 02:31 PM
+-- Generation Time: Mar 15, 2018 at 10:42 AM
 -- Server version: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -50,14 +50,6 @@ CREATE TABLE `cart` (
   `product_id` int(11) NOT NULL,
   `quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `cart`
---
-
-INSERT INTO `cart` (`id`, `session_id`, `product_id`, `quantity`) VALUES
-(1, '391ca0c201d742df23f4fb2895fcb614', 3, 21),
-(2, '391ca0c201d742df23f4fb2895fcb614', 4, 2);
 
 -- --------------------------------------------------------
 
@@ -109,7 +101,7 @@ CREATE TABLE `customers` (
   `email_status` enum('not verified','verified') NOT NULL,
   `activation_code` varchar(255) NOT NULL,
   `token` varchar(255) DEFAULT NULL,
-  `date_created` date NOT NULL
+  `date_created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -117,9 +109,9 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`id`, `email`, `password`, `first_name`, `last_name`, `sms`, `address`, `email_status`, `activation_code`, `token`, `date_created`) VALUES
-(1, 'jeremy.rotoni@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'Jeremy', 'Rotoni', 9176323441, 'Cainta', 'verified', 'df209593a0f2e7cb66518f99504e93f0', 'a0503df8f7a4d1d376b64c275121de64', '2018-12-03'),
-(2, 'lordvirgo31@yahoo.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'Jeremy', 'Rotoni', 9123132456, 'Cainta', 'verified', '6f01e1da1a66d6e6dd005ec43b75c277', '2f5030c6899bf2172e35cecbda0b4415', '2018-12-03'),
-(3, 'jcrotoni@up.edu.ph', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'Jeremy', 'Rotoni', 9123156123, 'Cainta', 'verified', 'f43ddcf5e32daa72f4021e1b2d7933ed', '1c6b87f3d8d9e7a5510431b7532e6b65', '2018-12-03');
+(1, 'guess', '', 'guess', 'guess', 1111111, '', '', '', NULL, '0000-00-00 00:00:00'),
+(2, 'jeremy.rotoni@gmail.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'Jeremy', 'Pogi', 9176323441, 'Cainta', 'verified', 'f03075b3d64b81e228963c532dbc55a4', '9e4919c25aa3e7d9146ae849d8b0068f', '2018-03-14 04:31:28'),
+(3, 'lordvirgo31@yahoo.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'Jeremy', 'Rotoni', 9222222222, 'Not Specified', 'verified', '2a887f0ef54fb74c681091f5fe7a590c', 'd685b22935b370a4ffef50bfd23236b1', '2018-03-15 04:31:29');
 
 -- --------------------------------------------------------
 
@@ -135,20 +127,20 @@ CREATE TABLE `employee` (
   `last_name` varchar(255) NOT NULL,
   `sms` varchar(255) NOT NULL,
   `address` varchar(255) NOT NULL,
-  `profile_pic` text NOT NULL,
+  `profile_pic` text,
   `SSS_NUM` varchar(255) DEFAULT NULL,
   `PAGIBIG_NUM` varchar(255) DEFAULT NULL,
   `TIN` varchar(255) DEFAULT NULL,
   `PHILHEALTH_NUM` varchar(255) DEFAULT NULL,
-  `role_id` int(11) NOT NULL
+  `roles` enum('staff','admin') NOT NULL DEFAULT 'staff'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `employee`
 --
 
-INSERT INTO `employee` (`id`, `username`, `password`, `first_name`, `last_name`, `sms`, `address`, `profile_pic`, `SSS_NUM`, `PAGIBIG_NUM`, `TIN`, `PHILHEALTH_NUM`, `role_id`) VALUES
-(1, 'maymi', 'admin', 'Maymi', 'Pugi', '123', 'Quezon City', 'to be uploaded', NULL, NULL, NULL, NULL, 1);
+INSERT INTO `employee` (`id`, `username`, `password`, `first_name`, `last_name`, `sms`, `address`, `profile_pic`, `SSS_NUM`, `PAGIBIG_NUM`, `TIN`, `PHILHEALTH_NUM`, `roles`) VALUES
+(1, 'maymi', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'Maymi', 'Pugi', '123', 'Quezon City', 'to be uploaded', NULL, NULL, NULL, NULL, 'admin');
 
 -- --------------------------------------------------------
 
@@ -159,15 +151,30 @@ INSERT INTO `employee` (`id`, `username`, `password`, `first_name`, `last_name`,
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
-  `order_date` datetime NOT NULL,
-  `delivery_date` varchar(255) DEFAULT NULL,
+  `reference_code` varchar(255) NOT NULL,
+  `order_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `delivery_date` datetime NOT NULL,
   `notes` varchar(255) DEFAULT NULL,
   `name` varchar(255) NOT NULL,
-  `contact_details` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `sms` bigint(10) NOT NULL,
   `address` varchar(255) NOT NULL,
   `promotion_id` int(11) NOT NULL DEFAULT '1',
   `status_id` int(11) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `customer_id`, `reference_code`, `order_date`, `delivery_date`, `notes`, `name`, `email`, `sms`, `address`, `promotion_id`, `status_id`) VALUES
+(8, 1, '03149PW455', '2018-03-14 14:37:46', '2018-03-16 14:37:46', NULL, 'jeremy', 'jeremy.rotoni@gmau.com', 9135654654, '9', 1, 1),
+(9, 1, '03147RMPDP', '2018-03-14 14:41:08', '2018-03-16 14:41:08', NULL, '', '', 0, '', 1, 1),
+(10, 1, '0314ZAWA3E', '2018-03-14 14:54:31', '2018-03-16 14:54:31', NULL, 'lv', 'lordvirgo31@yahoo.com', 9356654455, '9999', 1, 1),
+(11, 1, '0314RYURDI', '2018-03-14 15:33:24', '2018-03-16 15:33:24', NULL, '', '', 0, '', 1, 1),
+(12, 1, '0314URMBAJ', '2018-03-14 15:35:16', '2018-03-16 15:35:16', NULL, '', '', 0, '', 1, 1),
+(13, 2, '0314ASNMD4', '2018-03-14 15:37:28', '2018-03-16 15:37:28', NULL, 'Jeremy Rotoni', 'jeremy.rotoni@gmail.com', 9176323441, 'Cainta', 1, 1),
+(14, 2, '0314MURJ7T', '2018-03-14 19:32:53', '2018-03-16 19:32:53', NULL, 'Jeremy Rotoni', 'jeremy.rotoni@gmail.com', 9176323441, 'Cainta', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -176,12 +183,28 @@ CREATE TABLE `orders` (
 --
 
 CREATE TABLE `order_details` (
-  `id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
+  `reference_code` varchar(255) NOT NULL,
   `product_id` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL,
-  `subtotal` decimal(10,2) NOT NULL
+  `quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `order_details`
+--
+
+INSERT INTO `order_details` (`order_id`, `reference_code`, `product_id`, `quantity`) VALUES
+(8, '03149PW455', 2, 11),
+(8, '03149PW455', 23, 1),
+(9, '03147RMPDP', 4, 4),
+(10, '0314ZAWA3E', 3, 2),
+(10, '0314ZAWA3E', 4, 1),
+(11, '0314RYURDI', 3, 1),
+(12, '0314URMBAJ', 2, 5),
+(13, '0314ASNMD4', 2, 2),
+(14, '0314MURJ7T', 3, 1),
+(14, '0314MURJ7T', 4, 1),
+(14, '0314MURJ7T', 20, 1);
 
 -- --------------------------------------------------------
 
@@ -272,25 +295,6 @@ INSERT INTO `promotion` (`id`, `promo_code`, `discount`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `roles`
---
-
-CREATE TABLE `roles` (
-  `id` int(11) NOT NULL,
-  `roles` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `roles`
---
-
-INSERT INTO `roles` (`id`, `roles`) VALUES
-(1, 'admin'),
-(2, 'staff');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `status`
 --
 
@@ -357,23 +361,21 @@ ALTER TABLE `employee`
   ADD UNIQUE KEY `SSS_NUM` (`SSS_NUM`),
   ADD UNIQUE KEY `PAGIBIG_NUM` (`PAGIBIG_NUM`),
   ADD UNIQUE KEY `TIN` (`TIN`),
-  ADD UNIQUE KEY `PHILHEALTH_NUM` (`PHILHEALTH_NUM`),
-  ADD KEY `employee_fk0` (`role_id`);
+  ADD UNIQUE KEY `PHILHEALTH_NUM` (`PHILHEALTH_NUM`);
 
 --
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `orders_fk0` (`customer_id`),
   ADD KEY `orders_fk1` (`promotion_id`),
-  ADD KEY `orders_fk2` (`status_id`);
+  ADD KEY `orders_fk2` (`status_id`),
+  ADD KEY `orders` (`customer_id`);
 
 --
 -- Indexes for table `order_details`
 --
 ALTER TABLE `order_details`
-  ADD PRIMARY KEY (`id`),
   ADD KEY `order_details_fk0` (`order_id`),
   ADD KEY `order_details_fk1` (`product_id`);
 
@@ -401,12 +403,6 @@ ALTER TABLE `promotion`
   ADD UNIQUE KEY `promo_code` (`promo_code`);
 
 --
--- Indexes for table `roles`
---
-ALTER TABLE `roles`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `status`
 --
 ALTER TABLE `status`
@@ -426,7 +422,7 @@ ALTER TABLE `attendance`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -456,13 +452,7 @@ ALTER TABLE `employee`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `order_details`
---
-ALTER TABLE `order_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `payroll`
@@ -481,12 +471,6 @@ ALTER TABLE `products`
 --
 ALTER TABLE `promotion`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `roles`
---
-ALTER TABLE `roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `status`
@@ -511,16 +495,10 @@ ALTER TABLE `cart`
   ADD CONSTRAINT `cart_fk0` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
 
 --
--- Constraints for table `employee`
---
-ALTER TABLE `employee`
-  ADD CONSTRAINT `employee_fk0` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`);
-
---
 -- Constraints for table `orders`
 --
 ALTER TABLE `orders`
-  ADD CONSTRAINT `orders_fk0` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`),
+  ADD CONSTRAINT `orders` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`),
   ADD CONSTRAINT `orders_fk1` FOREIGN KEY (`promotion_id`) REFERENCES `promotion` (`id`),
   ADD CONSTRAINT `orders_fk2` FOREIGN KEY (`status_id`) REFERENCES `status` (`id`);
 

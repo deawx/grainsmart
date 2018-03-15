@@ -21,3 +21,5 @@ if ($result)
 	header('location: ../activate_email.php?msg='.$message);
 else
 	die('Error: ' . $sql . '<br>' . mysqli_error($conn));
+
+mysqli_close($conn);

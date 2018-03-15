@@ -18,10 +18,10 @@ if(!isset($_SESSION['user_id']) && !isset($_SESSION['login_user'])) {
 	$_SESSION['cart'] = array();
 
 	// create session variable for item counter
-	$_SESSION['item_count'] = 0;
+	$_SESSION['item_count'] = '';
 	$_SESSION['user_id'] = md5(rand());
 }
-	var_dump($_SESSION['user_id']);
+	// var_dump($_SESSION['user_id']);
 
 ?>
 

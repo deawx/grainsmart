@@ -34,7 +34,7 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="index.php">
-        <img alt="Grainsmart Cainta" src="assets/image/grainsmart.jpg">
+        <img alt="Grainsmart Cainta" src="assets/images/grainsmart.jpg">
       </a>
 
 
@@ -90,6 +90,7 @@
         <li><a href="products.php">Products</a></li>
         <li><a href="about_us.php">About Us</a></li>
         <li><a href="contact_us.php">Contact Us</a></li>
+        <li><a href="track_order.php">Track Order</a></li>
         
         <?php
 

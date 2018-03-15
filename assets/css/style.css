@@ -1,5 +1,13 @@
+.vertical-center {
+  min-height: 100%; 
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+}
+
 .content {
-  min-height: calc(100vh - 202px);
+  min-height: calc(100vh - 198px);
 }
 
 .col-centered {
@@ -83,7 +91,8 @@
 
 .navbar-brand>img {
 	height: 100%;
-	padding-left: 15px;
+	margin-top: 15px;
+	margin-left: 15px;
 	width: auto;
 }
 
@@ -95,10 +104,12 @@
 #center-menu {
 	width: 100%;
 	text-align: center;
+	margin-top: -5px;
 }
 
 @media (max-width: 767px) {
 	.navbar-brand>img {
+		margin: 0;
 		height: 100%;
 		padding-left: 10px;
 		padding-top: 5px;
@@ -117,6 +128,9 @@
 	.navbar-icons {
 		float: none;
 		display: none !important;
+	}
+	a[href="grocery_bag.php"] {
+		padding-left: 25px !important;
 	}	
 }
 
@@ -124,9 +138,8 @@
 
 
 /* Footer */
-
 .main-footer {
-	/*position: relative;*/
+	/*position: absolute;*/
 	/*left: 0;*/
 	/*bottom: 0;*/
 	height: 50px;

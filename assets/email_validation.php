@@ -7,7 +7,7 @@ $sql = "select * from customers where email = '$email'";
 $result = mysqli_query($conn, $sql);
 
 if (mysqli_num_rows($result) > 0) {
-echo'<span style="color:red">Email address has already been used!</span>';
+echo'<span style="color:red">Email address has already been used! Please login!</span>';
 }
 
 mysqli_close($conn);
