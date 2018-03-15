@@ -8,7 +8,7 @@
 	<title>Grainsmart Cainta - <?php getTitle();?></title>
 
 	<!-- Import FavIcon -->
-	<link rel="shortcut icon" href="../assets/image/favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="../assets/images/favicon.ico" type="image/x-icon">
 	<link rel="icon" href="../assets/images/favicon.ico" type="image/x-icon">
 
 	<!-- import bootstrap -->

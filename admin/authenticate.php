@@ -14,6 +14,7 @@ if (mysqli_num_rows($result) > 0) {
 	$employee = mysqli_fetch_assoc($result);
 	if ($username == $employee['username'] && $password == $employee['password']) {
 		$_SESSION['role'] = $employee['roles'];
+		$_SESSION['admin_name'] = $employee['first_name'] . ' ' . $employee['last_name']; 
 		header('location: admin.php'); 
 	} else {
 		header('location:index.php');

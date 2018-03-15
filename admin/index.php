@@ -13,7 +13,7 @@ include 'partials/head.php';?>
 
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-4 col-md-4 col-centered vertical-center">
+			<div class="col-lg-4 col-md-4 col-sm-6 col-centered vertical-center">
 				<div class="panel panel-default">	
 					<div class="panel-heading btn-green"><h4 style="color: #fff;">Admin</h4></div>
 						<div class="panel-body">
