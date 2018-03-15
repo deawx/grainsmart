@@ -6,7 +6,9 @@ function getTitle() {
 	echo 'Homepage';
 }
 
-include 'partials/head.php';?>
+include 'partials/head.php';
+
+?>
 
 </head>
 <body>
@@ -14,11 +16,14 @@ include 'partials/head.php';?>
 	<?php include 'partials/main_header.php'; ?>
 
 	<?php
-	if(isset($_SESSION['current_user'])) {
-		echo '<h1>HELLO WORLD!</h1>';
+	if(isset($_SESSION['login_user'])) {
+		$name = $_SESSION['login_user'];
+		echo '<h1>HELLO WORLD!</h1>' . $name;
 	} else {
-		echo date("F j, Y - h:i:s A");
+		// header('location: index.php');
 	}
+
+
 
 	?>
 

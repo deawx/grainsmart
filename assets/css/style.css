@@ -1,3 +1,15 @@
+.vertical-center {
+  min-height: 100%; 
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+}
+
+.content {
+  min-height: calc(100vh - 198px);
+}
+
 .col-centered {
 	float: none;
 	margin: 0 auto;
@@ -8,6 +20,10 @@
 }
 
 /* CSS Colors */
+.badge {
+	background-color: #fff;
+}
+
 .dark-green {
 	color: #064B27 !important;
 }
@@ -75,7 +91,8 @@
 
 .navbar-brand>img {
 	height: 100%;
-	padding-left: 15px;
+	margin-top: 15px;
+	margin-left: 15px;
 	width: auto;
 }
 
@@ -87,10 +104,12 @@
 #center-menu {
 	width: 100%;
 	text-align: center;
+	margin-top: -5px;
 }
 
 @media (max-width: 767px) {
 	.navbar-brand>img {
+		margin: 0;
 		height: 100%;
 		padding-left: 10px;
 		padding-top: 5px;
@@ -109,6 +128,9 @@
 	.navbar-icons {
 		float: none;
 		display: none !important;
+	}
+	a[href="grocery_bag.php"] {
+		padding-left: 25px !important;
 	}	
 }
 
@@ -116,11 +138,11 @@
 
 
 /* Footer */
-
 .main-footer {
-	position: relative;
-	left: 0;
-	bottom: 0;
+	/*position: absolute;*/
+	/*left: 0;*/
+	/*bottom: 0;*/
+	height: 50px;
 	width: 100%;
 	background-color: #064B27;
 	color: #eee;
@@ -144,6 +166,27 @@ td {
 	border: 1px solid black;*/
 }
 
-tr:hover {
+tbody>tr:hover {
 	background-color: #FFEC99 !important;
 }
+
+/*SHOPPING CART*/
+
+.btnAddAction{    background-color: #eb9e4f;
+    border: 0;
+    padding: 3px 10px;
+    color: #ffffff;
+    margin-left: 2px;
+    border-radius: 2px;
+}
+/*.cart-item {border-bottom: #79b946 1px dotted;padding: 10px;}
+#product-grid {margin-bottom:30px;}
+.product-item {	float:left;	background: #ffffff;margin:15px 10px;	padding:5px;border:#CCC 1px solid;border-radius:4px;}
+.product-item div{text-align:center;	margin:10px;}
+.product-price {    
+	color: #005dbb;
+    font-weight: 600;
+}
+.product-image {height:100px;background-color:#FFF;}
+.clear-float{clear:both;}
+.demo-input-box{border-radius:2px;border:#CCC 1px solid;padding:2px 1px;}*/

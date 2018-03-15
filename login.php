@@ -1,7 +1,16 @@
 <?php 
 
+session_start();
+
 function getTitle() {
 	echo 'Log In';
+}
+
+if (isset($_GET['msg'])) {
+	$message = $_GET['msg'];
+
+} else {
+	$message = '';
 }
 
 include 'partials/head.php';?>
@@ -14,6 +23,11 @@ include 'partials/head.php';?>
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-6 col-md-6 col-centered">
+				<div id="validation-message">
+				    <?php
+				        echo '<div>'.$message.'</div>';
+				     ?>
+				</div>
 				<div class="panel panel-default">	
 					<div class="panel-heading"><h4>Log in</h4></div>
 						<div class="panel-body">
@@ -58,7 +72,7 @@ include 'partials/head.php';?>
 	</div> <!-- //.container -->
 
 	<!-- main footer -->
-	<!-- <?php include 'partials/main_footer.php'; ?> -->
+	<?php include 'partials/main_footer.php'; ?>
 
 	<?php include 'partials/foot.php'; ?>
 </body>

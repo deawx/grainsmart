@@ -2,16 +2,23 @@
   <div id="horizontal-greenbar" class="wrapper">
     <ul class="nav navbar-nav">
       <?php
-        if (isset($_SESSION['current_user'])) {
-          echo '
-            <li class="navbar-login" id="welcome-nav">
-             <a href="profile.php"> Hello, ' . ucfirst($_SESSION['current_user']) . '!</a>
-            </li>
-          ';
-        } else {
-          echo '<li class="navbar-icons"><a href="#"><span class="glyphicon glyphicon-envelope gold" aria-hidden="true"></span> grainsmart.cainta@gmail.com</a></li>
-      <li class="navbar-icons"><a href="#"><span class="glyphicon glyphicon-earphone gold" aria-hidden="true"></span> +63.917.632.3441</a></li>';
-        }
+        // if (isset($_SESSION['login_user']) || $_SESSION['item_count']!=0) {
+            if (isset($_SESSION['login_user'])){
+            echo '
+              <li class="navbar-login" id="welcome-nav">
+               <a href="profile.php"> Hello, ' . ucfirst($_SESSION['login_user']) . '!</a>
+              </li>
+            ';
+          }
+            echo '
+            <li><a href="grocery_bag.php">My Cart <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+            <strong style="color:red;" class="badge">'.$_SESSION['item_count'].'</strong>
+            </a></li>';
+          
+      //   } else {
+      //     echo '<li class="navbar-icons"><a href="#"><span class="glyphicon glyphicon-envelope gold" aria-hidden="true"></span> grainsmart.cainta@gmail.com</a></li>
+      // <li class="navbar-icons"><a href="#"><span class="glyphicon glyphicon-earphone gold" aria-hidden="true"></span> +63.917.632.3441</a></li>';
+      //   }
 
       ?>
       
@@ -27,7 +34,7 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="index.php">
-        <img alt="Grainsmart Cainta" src="assets/image/grainsmart.jpg">
+        <img alt="Grainsmart Cainta" src="assets/images/grainsmart.jpg">
       </a>
 
 
@@ -79,14 +86,15 @@
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav" id="center-menu">
-        <li class="active"><a href="index.php">Home</a></li>
+        <li><a href="index.php">Home</a></li>
         <li><a href="products.php">Products</a></li>
-        <li><a href="#">About Us</a></li>
-        <li><a href="#">Contact Us</a></li>
+        <li><a href="about_us.php">About Us</a></li>
+        <li><a href="contact_us.php">Contact Us</a></li>
+        <li><a href="track_order.php">Track Order</a></li>
         
         <?php
 
-        if (isset($_SESSION['current_user'])) {
+        if (isset($_SESSION['login_user'])) {
           echo '
             <li>
               <a href="logout.php">Logout</a>
@@ -101,3 +109,4 @@
     </div> <!--/.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+<div class="content">

@@ -1,7 +1,15 @@
-<?php 
+<?php
+
+session_start(); 
 
 function getTitle() {
 	echo 'Register';
+}
+if (isset($_GET['msg'])) {
+	$message = $_GET['msg'];
+
+} else {
+	$message = '';
 }
 
 include 'partials/head.php';?>
@@ -15,7 +23,12 @@ include 'partials/head.php';?>
 
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-lg-6 col-md-6 col-sm-8 col-centered">
+			<div class="col-lg-5 col-md-6 col-sm-8 col-centered">
+				<div id="validation-message">
+				    <?php
+				        echo '<div>'.$message.'</div>';
+				     ?>
+				</div>
 				<div class="panel panel-default">	
 					<div class="panel-heading"><h4>Sign up</h4></div>
 						<div class="panel-body">
@@ -90,13 +103,16 @@ include 'partials/head.php';?>
 								<!-- <div class="form-group">
 									<label for="address">Address</label>
 									<textarea class="form-control" rows="3" name="address" id="address" required></textarea>
-								</div>	 -->	
+								</div>	 -->
 
-								<input type="submit" name="login" class="btn btn-green btn-block" id="registerBtn" value="Register"></input>
-
+								<input type="submit" name="login" class="btn btn-green btn-block" id="registerBtn" value="Register">
 							</form>
 						</div>
 					<div class="panel-heading">
+						<div class="alert alert-danger collapse" id="errorAlert">
+							<a id="errorClose" href="#" class="close" data-dismiss="alert">&times;</a>
+							<strong>ERROR!</strong> Please check your form!
+						</div>
 						<p>Already have an account? <a href="login.php">Sign in here</a></p>	
 					</div>
 				</div>					
@@ -143,7 +159,9 @@ include 'partials/head.php';?>
 
 			$('#sms').keyup(function(){
 				var regexp = new RegExp(/^[9][0-9]{9}$/);
-				if(regexp.test($('#sms').val())) {
+				var smsText = $(this).val();
+				$('[for="sms"]').html("Mobile Number");
+				if(regexp.test(smsText)) {
 					$('#sms').closest('.form-group').removeClass('has-error');
 					$('#sms').closest('.form-group').addClass('has-success');
 					$('[for="sms"]').html('<span style="color:green;">Valid</span> Mobile Number');
@@ -153,11 +171,25 @@ include 'partials/head.php';?>
 					$('[for="sms"]').html('<span style="color:red;">Invalid</span> Mobile Number');
 					sms = false;
 				}
+
+				$.post('assets/sms_validation.php',
+					{ sms: smsText },
+					function(data, status) {
+						// console.log('Processed: ' + data);
+						if(data.length > 0){
+							$('[for="sms"]').html(data);
+							$('#sms').closest('.form-group').addClass('has-error');
+							sms = false;	
+						}
+						
+					});
 			})
 
 			$('#email').keyup(function(){
 				var regexp = new RegExp(/^[a-zA-Z0-9._]+@[a-zA-Z0-9._]+\.[a-zA-Z]{2,4}$/);
-				if(regexp.test($('#email').val())) {
+				var emailText = $(this).val();
+				$('[for="email"]').html("Email Address");
+				if(regexp.test(emailText)) {
 					$('#email').closest('.form-group').removeClass('has-error');
 					$('#email').closest('.form-group').addClass('has-success');
 					email = true;
@@ -165,6 +197,18 @@ include 'partials/head.php';?>
 					$('#email').closest('.form-group').addClass('has-error');
 					email = false;
 				}
+
+			$.post('assets/email_validation.php',
+				{ email: emailText },
+				function(data, status) {
+					// console.log('Processed: ' + data);
+					if(data.length > 0){
+						$('[for="email"]').html(data);
+						$('#email').closest('.form-group').addClass('has-error');
+						email = false;	
+					}
+					
+				});
 			})
 
 			$('#password').on('input', function(){
@@ -211,35 +255,31 @@ include 'partials/head.php';?>
 				$('#confirmPassword').val('');
 			}
 
+			
+		    window.errorMessage = function errorMessage() {
+				
+				$('#errorAlert').show('fade');
+
+				setTimeout(function(){
+				$('#errorAlert').hide('fade');	
+				}, 3500)
+
+				$('#errorClose').click(function(){
+					$('#errorAlert').hide('fade');	
+				})        
+		    }
+			
+			
 		})
 
 		function validateForm() {
-			var x = true;
-
-			if(!fname) {
-				alert('Input valid first name!');
-				x = false;
-			}
-			if(!lname) {
-				alert('Input valid last name!');
-				x = false;	
-			}
-			if(!email) {
-				alert('Input valid email!');
-				x = false;
-			}
-			if($('#confirmPassword').val() != $('#password').val()) {
-				alert('Input correct password!');
-				x = false;
-			}
-			if(!sms) {
-				alert('Input valid mobile number!');
-				x = false;
+			if(!fname || !lname || !email || !sms || ($('#confirmPassword').val() != $('#password').val())) {
+				errorMessage();
+				return false;
 			} else {
 				alert('Congratulations!');
+				return true;
 			}
-
-			return x;
 		}
 	</script>
 </body>
