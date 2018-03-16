@@ -98,7 +98,18 @@ if (isset($_GET['msg'])) {
 					<span><i class="fa fa-user"></i></span> Users
 				</div>
 				<div class="main">
-					<?php echo $message;?>
+					<div class="col-md-3">
+					            <div id="imaginary_container"> 
+					                <div class="input-group stylish-input-group">
+					                    <input type="text" class="form-control"  placeholder="Search name" >
+					                    <span class="input-group-addon">
+					                        <button type="submit">
+					                            <span class="glyphicon glyphicon-search"></span>
+					                        </button>  
+					                    </span>
+					                </div>
+					            </div>
+					        </div>
 				</div>
 			</div>
 			<div id="div_settings" class="divy" style="display: none;">
@@ -109,7 +120,7 @@ if (isset($_GET['msg'])) {
 				</div>
 			</div>
 			<div id="div_products" class="divy" style="display: none;">
-				<div class="title" style="margin-bottom: 20px;">
+				<div class="title">
 					<span><i class="fa fa-dropbox"></i> Products</span>
 				</div>
 				<div class="main">
@@ -124,7 +135,7 @@ if (isset($_GET['msg'])) {
 					                    </span>
 					                </div>
 					            </div>
-					            <button type="button" class="btn btn-green pull-right addProduct" data-toggle="modal" data-target="#addProductModal" style="margin-top: 10px;">Add New Product</button>
+					            <button type="button" class="btn btn-green pull-right addProduct" data-toggle="modal" data-target="#addProductModal" style="margin: 10px 0;">Add New Product</button>
 					        </div>
 					<div class="col-md-9">
 					<div class="panel panel-default">
@@ -132,7 +143,7 @@ if (isset($_GET['msg'])) {
 					    <h3 class="panel-title">Order Summary</h3>
 					  </div> -->
 					  <div class="panel-body">
-					  	<div class="table-responsive text-center">
+					  	<div class=" text-center">
 					<table class="table table-striped table-responsive">
 						<thead id="stocksTable">
 						<th>Product Name <span><i class="fa fa-sort"></i></span></th>
@@ -155,7 +166,7 @@ if (isset($_GET['msg'])) {
 							<td>PHP '. $price_retail .'</td>
 							<td>'. $stocks_onhand .' (kg) </td>
 							<td> <button type="button" class="btn btn-default btn-sm btn-info editProduct" data-toggle="modal" data-target="#editProductModal" data-index="'.$id.'"><span class="glyphicon glyphicon-cog"></span></button>
-								<button type="button" id="deleteItem" class="btn btn-default btn-sm btn-danger" data-index="'.$id.'" data-toggle="modal" data-target="#deleteItemModal"><span class="glyphicon glyphicon-remove"></span></button></td>
+								<button type="button" class="btn btn-default btn-sm btn-danger deleteItem" data-index="'.$id.'" data-toggle="modal" data-target="#deleteItemModal"><span class="glyphicon glyphicon-remove"></span></button></td>
 						</tr>
 						';
 					}
@@ -175,9 +186,59 @@ if (isset($_GET['msg'])) {
 					<span><i class="fa fa-briefcase"></i></span> Orders
 				</div>
 				<div class="main">
-				</div>
-			</div>
-		</div>
+					<div class="col-md-3">
+					            <div id="imaginary_container"> 
+					                <div class="input-group stylish-input-group">
+					                    <input type="text" class="form-control"  placeholder="Search reference code" >
+					                    <span class="input-group-addon">
+					                        <button type="submit">
+					                            <span class="glyphicon glyphicon-search"></span>
+					                        </button>  
+					                    </span>
+					                </div>
+					            </div>
+					        </div>
+					<div class="col-md-9">
+					<div class="panel panel-default">
+<!-- 					  <div class="panel-heading">
+					    <h3 class="panel-title">Order Summary</h3>
+					  </div> -->
+					  <div class="panel-body">
+					  	<div class=" text-center">
+					<table class="table table-striped table-responsive">
+						<thead id="ordersTable">
+						<th>Reference Code <span><i class="fa fa-sort"></i></span></th>
+						<th>Order Date <span><i class="fa fa-sort"></i></span></th>
+						<th>Delivery Date <span><i class="fa fa-sort"></i></span></th>
+						<th>Status <span><i class="fa fa-sort"></i></span></th>
+						</thead>
+						<tbody>
+							<?php
+							$sql = "SELECT o.id, o.reference_code, o.order_date, o.delivery_date, s.order_status FROM orders o INNER JOIN status s ON o.status_id = s.id";				
+							$result = mysqli_query($conn, $sql);
+
+							while ($order_list = mysqli_fetch_assoc($result)) {
+								extract($order_list);
+								$order = strtotime($order_date);
+								$delivery = strtotime($delivery_date);
+								echo '
+								<tr>
+									<td><a href="orders.php?id='.$id.'">' . $reference_code . '</a></td>
+									<td>'. date("F d, Y", $order) .'</td>
+									<td>'. date("F d, Y", $delivery) .'</td>
+									<td>'. $order_status .' </td>
+								</tr>
+								';
+							}
+							?>
+						</tbody>
+					</table>
+				</div> <!-- //.text center -->
+			</div> <!-- //.panel body -->
+				</div> <!-- //.panel -->
+			</div> <!-- //.col -->
+		</div> <!-- //.main -->
+	</div> <!-- //#div_orders -->
 
 		<!-- Edit Product Modal -->
 		<div class="modal fade" id="editProductModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -222,16 +283,14 @@ if (isset($_GET['msg'])) {
 		  <div class="modal-dialog">
 		  		
 		    <!-- Modal content-->
-		  	<form method="POST" action="assets/delete_item.php">
-		  	<input hidden name="user_id" value="<?php echo $id; ?>" style="display: none;">
+		  	<form method="POST" action="assets/delete_product.php">
+		  	
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal">&times;</button>
 		        <h4 class="modal-title">Delete Item</h4>
 		      </div>
 		      <div id="deleteUserModalBody" class="modal-body">
-		      	<p>Do you really want to delete <?php echo $id; ?>?</p>
-		      	<img src="<?php echo $item['image']; ?>" alt="Image of Beer">
 		      </div>
 		      <div class="modal-footer">
 		        <button type="submit" class="btn btn-danger">Yes</button>
@@ -274,6 +333,17 @@ if (isset($_GET['msg'])) {
 						},
 						function(data, status) {
 							$('#editProductModalBody').html(data);
+						});
+				});
+
+				$('.deleteItem').on('click', function () {
+					var productID = $(this).data('index');
+					$.get('assets/delete_item.php',
+						{
+							id: productID
+						},
+						function(data, status) {
+							$('#deleteUserModalBody').html(data);
 						});
 				});
 

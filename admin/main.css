@@ -149,6 +149,10 @@ body {
 	font-size: 18px;
 }
 
+.divy > .title {
+	margin-bottom: 20px;
+}
+
 #stocksTable th {
 	text-align: center;
 }
