@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 15, 2018 at 10:42 AM
+-- Generation Time: Mar 16, 2018 at 11:16 AM
 -- Server version: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -235,7 +235,7 @@ CREATE TABLE `products` (
   `name` varchar(255) NOT NULL,
   `stock_price` decimal(10,2) NOT NULL,
   `price_retail` decimal(10,2) NOT NULL,
-  `description` varchar(255) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
   `stocks_onhand` decimal(10,2) NOT NULL,
   `product_image` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -245,7 +245,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `category_id`, `name`, `stock_price`, `price_retail`, `description`, `stocks_onhand`, `product_image`) VALUES
-(1, 1, 'Malagkit', '56.00', '62.00', 'Tempus sed tincidunt accumsan magna orci. Amet euismod aut accumsan a quis. A adipiscing auctor. A posuere nostra. Consequat est tortor feugiat a pharetra blandit turpis mauris a nec ut.', '100.00', 'assets/images/rice.png'),
+(1, 1, 'Malagkitan', '56.00', '63.00', 'Tempus sed tincidunt accumsan magna orci. Amet euismod aut accumsan a quis. A adipiscing auctor. A posuere nostra. Consequat est tortor feugiat a pharetra blandit turpis mauris a nec ut.', '100.00', 'assets/images/rice.png'),
 (2, 1, 'Brown Rice', '48.00', '54.00', 'Tempus sed tincidunt accumsan magna orci. Amet euismod aut accumsan a quis. A adipiscing auctor. A posuere nostra. Consequat est tortor feugiat a pharetra blandit turpis mauris a nec ut.', '101.00', 'assets/images/rice.png'),
 (3, 1, 'Premium Dinorado', '50.00', '54.00', 'Tempus sed tincidunt accumsan magna orci. Amet euismod aut accumsan a quis. A adipiscing auctor. A posuere nostra. Consequat est tortor feugiat a pharetra blandit turpis mauris a nec ut.', '102.00', 'assets/images/rice.png'),
 (4, 1, 'Premium Whole Grain', '42.50', '48.00', 'Tempus sed tincidunt accumsan magna orci. Amet euismod aut accumsan a quis. A adipiscing auctor. A posuere nostra. Consequat est tortor feugiat a pharetra blandit turpis mauris a nec ut.', '103.00', 'assets/images/rice.png'),
@@ -271,7 +271,10 @@ INSERT INTO `products` (`id`, `category_id`, `name`, `stock_price`, `price_retai
 (24, 2, 'Burger Patty', '148.00', '180.00', 'Tempus sed tincidunt accumsan magna orci. Amet euismod aut accumsan a quis. A adipiscing auctor. A posuere nostra. Consequat est tortor feugiat a pharetra blandit turpis mauris a nec ut.', '123.00', 'assets/images/meat.png'),
 (25, 2, 'Hungarian Sausage', '200.00', '240.00', 'Tempus sed tincidunt accumsan magna orci. Amet euismod aut accumsan a quis. A adipiscing auctor. A posuere nostra. Consequat est tortor feugiat a pharetra blandit turpis mauris a nec ut.', '124.00', 'assets/images/meat.png'),
 (26, 2, 'Cheese Kreamer', '200.00', '240.00', 'Tempus sed tincidunt accumsan magna orci. Amet euismod aut accumsan a quis. A adipiscing auctor. A posuere nostra. Consequat est tortor feugiat a pharetra blandit turpis mauris a nec ut.', '125.00', 'assets/images/meat.png'),
-(27, 2, 'Corned Beef', '169.00', '220.00', 'Tempus sed tincidunt accumsan magna orci. Amet euismod aut accumsan a quis. A adipiscing auctor. A posuere nostra. Consequat est tortor feugiat a pharetra blandit turpis mauris a nec ut.', '126.00', 'assets/images/meat.png');
+(27, 2, 'Corned Beef', '169.00', '220.00', 'Tempus sed tincidunt accumsan magna orci. Amet euismod aut accumsan a quis. A adipiscing auctor. A posuere nostra. Consequat est tortor feugiat a pharetra blandit turpis mauris a nec ut.', '126.00', 'assets/images/meat.png'),
+(29, 1, 'Test', '123.00', '123.00', '123\r\n', '123.00', NULL),
+(30, 1, 'Test', '123.00', '1233.00', '123', '123.00', NULL),
+(31, 1, 'Rice Daw TEST', '123.00', '123.00', '123', '123.00', NULL);
 
 -- --------------------------------------------------------
 
@@ -464,7 +467,7 @@ ALTER TABLE `payroll`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `promotion`

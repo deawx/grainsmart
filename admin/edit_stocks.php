@@ -85,7 +85,6 @@ include 'partials/head.php';?>
 					},
 					function(data, status) {
 						$('#editProductModalBody').html(data);
-						// alert(data);
 					});
 			});
 		});
