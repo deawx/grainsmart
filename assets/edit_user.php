@@ -1,6 +1,10 @@
 <?php
-
+session_start();
 require '../connect.php';
+
+if($_GET['ck']==1) {
+	$_SESSION['fromckout'] = 'checkout';
+}
 
 $id = $_GET['id'];
 

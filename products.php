@@ -17,20 +17,6 @@ include 'partials/head.php';?>
 	<?php include 'partials/main_header.php'; ?>
 
 	<?php
-	// if (isset($_SESSION['login_user']) && !isset($_SESSION['order'])) {
-	// 	$customer_id = $_SESSION['customer_id'];
-	// 	$name = $_SESSION['login_user'] . ' ' . $_SESSION['last_name'];
-	// 	$sms = $_SESSION['sms'];
-	// 	$address = $_SESSION['address'];
-
-	// $sql = "INSERT INTO `orders`(`id`, `customer_id`, `order_date`, `delivery_date`, `notes`, `name`, `contact_details`, `address`, `promotion_id`, `status_id`) VALUES (null, $customer_id, now(), null, null, $name, $sms, $address, 1, 1)";				
-	// $result = mysqli_query($conn, $sql);
-
-	// $order = "SELECT * FROM orders";
-
-	// $_SESSION['order'];
-	
-	// }
 
 	if (isset($_GET['category']) && $_GET['category']!='All') {
 	$cat = $_GET['category'];
@@ -52,8 +38,10 @@ include 'partials/head.php';?>
 	$sort = array("0"=>"Price: Low to High", "1"=>"Price: High to Low", "2"=>"Rice", "3"=>"Meat");
 	?>
 
-	<div class="container">
-	<form method="GET" id="myForm">	
+	<div class="container-fluid">
+		<div class="row">
+	<form method="GET" id="myForm" class="col-lg-3">
+		<h3>Sort: </h3>	
 		<select class="form-control" name="category" onchange="myForm()">
 			<option>All</option>
 			<?php
@@ -69,8 +57,7 @@ include 'partials/head.php';?>
 		</select>
 	</form>
 
-	
-	
+	<div class="col-lg-9">	
 	<?php
 	$sql = "select * from products $query";				
 	$result = mysqli_query($conn, $sql);
@@ -79,15 +66,16 @@ include 'partials/head.php';?>
 		echo '<div class="card" style="width: 20rem; display: inline-block; margin:20px;">
 			<img class="img-responsive" src="'.$product_image.'">
 			<div class="card-block">
-			<h4 class="card-title"><strong>'.$name.'</strong></h4>
+			<h4 class="card-title" id="itemName'.$id.'"><strong>'.$name.'</strong></h4>
 			<div class="card-text">PHP '.$price_retail.'</div>
-			<div><input id="itemQuantity'.$id.'" type="text" name="quantity" value="1" size="2" /><input type="submit" value="Add to cart" class="btnAddAction" onclick="addToCart('.$id.')"/></div>
+			<div><input id="itemQuantity'.$id.'" type="number" name="quantity" value="1" size="4" style="width: 7em" /><input type="submit" value="Add to cart" class="btnAddAction" onclick="addToCart('.$id.')"/></div>
 			</div>
 		</div>';
 	}
-
-	echo '</div>';
-	?>
+?>
+	</div>
+</div>
+</div>
 
 	<!-- main footer -->
 	
@@ -97,7 +85,12 @@ include 'partials/head.php';?>
 		  mysqli_close($conn);
 	 ?>
 
+
+
 	 <script type="text/javascript">
+	 	$(document).ready(function(){
+	 		 
+	 	})
 	 	function myForm(){
 	 		document.getElementById('myForm').submit();
 	 	}
@@ -108,7 +101,9 @@ include 'partials/head.php';?>
 
 	 		// retrieve value of item quantity
 	 		var quantity = $('#itemQuantity' + id).val();
-	 		console.log(quantity);
+	 		var name = $('#itemName' + id).html();
+	 		// console.log(name);
+	 		$.bootstrapGrowl(quantity + " (kg) of " + name + " has successfully added to your cart.");
 
 	 		// create a post request to update session cart variable
 	 		$.post('assets/add_to_cart.php',
@@ -119,7 +114,6 @@ include 'partials/head.php';?>
 	 			function(data, status) {
 	 				
  					$('.badge').html(data);
-	 				console.log(data);
 	 				// if(data == 'not') {
 	 				// 	window.location='login.php';
 	 				// } else {
@@ -130,5 +124,7 @@ include 'partials/head.php';?>
 
 	 	}
 	 </script>
+
+	 
 </body>
 </html>

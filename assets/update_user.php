@@ -11,5 +11,11 @@ $address = $_POST['address'];
 $sql = "UPDATE customers SET first_name = '$first_name', last_name = '$last_name', sms = '$sms', address = '$address' WHERE email = '$email'";
 mysqli_query($conn, $sql);
 
-mysqli_close();
-header('location: ../profile.php');
+mysqli_close($conn);
+
+if(isset($_SESSION['fromckout'])) {
+unset($_SESSION['fromckout']);
+header('location: ../checkout.php');
+} else {
+header('location: ../profile.php');	
+}

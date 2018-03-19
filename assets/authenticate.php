@@ -27,7 +27,7 @@ if (mysqli_num_rows($result) > 0) {
             if(isset($_SESSION['checkout'])) {
                 header('location: ../checkout.php');
             } else {
-                header('location: ../home.php'); 
+                header('location: ../profile.php'); 
             }
         }
             

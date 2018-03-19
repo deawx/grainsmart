@@ -8,7 +8,8 @@ function getTitle() {
 }
 
 $url = parse_url($_SERVER['HTTP_REFERER']);
-if(basename($url['path'])=='grocery_bag.php' || basename($url['path'])=='login.php' ){
+// var_dump(basename($url['path']));
+if(basename($url['path'])=='grocery_bag.php' || basename($url['path'])=='login.php' || basename($url['path'])=='checkout.php'){
 
 } else {
 	header('location: grocery_bag.php');	
@@ -88,10 +89,12 @@ if(isset($_SESSION['email'])) {
 						    <h3 class="panel-title">Shipping Details</h3>
 						  </div>
 						  <div class="panel-body">
-						    <p><a href="profile.php">Edit shipping details?</a></p>
 						    <?php
 						    $customer = mysqli_fetch_assoc($result);
 						    extract($customer);
+						    ?>
+						    <p><a href="#editUserModal" data-toggle="modal" data-target="#editUserModal" data-index="<?php echo $id; ?>" id="editUser">Edit shipping details?</a></p>
+						    <?php
 						    echo 'Name: '.ucfirst($first_name).' '.ucfirst($last_name).'</br>';
 						    echo 'Email: '.$email.'</br>';
 						    echo 'Mobile #: 0'.$sms.'</br>';
@@ -162,6 +165,30 @@ if(isset($_SESSION['email'])) {
 		</div>
 	</div>
 
+		<!-- Edit Modal -->
+	<div id="editUserModal" class="modal fade" role="dialog">
+	  <div class="modal-dialog">
+	  		
+	    <!-- Modal content-->
+	  	<form method="POST" action="assets/update_user.php">
+	  	<input hidden name="user_id" value="<?php echo $id; ?>" style="display: none;">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        <h4 class="modal-title">Edit Personal Details</h4>
+	      </div>
+	      <div id="editUserModalBody" class="modal-body">
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+	        <button type="submit" class="btn btn-green">Save</button>
+	      </div>
+	    </div>
+	  	</form>
+
+	  </div>
+	</div>
+
 	<!-- main footer -->
 	<?php include 'partials/main_footer.php'; 
 	mysqli_close($conn);?>
@@ -174,6 +201,21 @@ if(isset($_SESSION['email'])) {
 		var email = false;
 
 		$(document).ready(function(){
+
+			$('#editUser').on('click',function(){
+				var userID = $(this).data('index');
+				
+				$.get('assets/edit_user.php',
+					{
+						id: userID,
+						ck: 1
+
+					},
+					function(data, status) {
+						$('#editUserModalBody').html(data);
+					});
+			});
+
 			$('#full_name').keyup(function(){
 				var regexp = new RegExp(/^[a-zA-Z .]+$/);
 				if(regexp.test($('#full_name').val())) {
@@ -246,7 +288,7 @@ if(isset($_SESSION['email'])) {
 				// errorMessage();
 				return false;
 			} else {
-				alert('Congratulations!');
+				// alert('Congratulations!');
 				return true;
 			}
 		}

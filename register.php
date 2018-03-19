@@ -277,7 +277,7 @@ include 'partials/head.php';?>
 				errorMessage();
 				return false;
 			} else {
-				alert('Congratulations!');
+				// alert('Congratulations!');
 				return true;
 			}
 		}

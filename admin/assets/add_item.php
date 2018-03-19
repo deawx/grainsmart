@@ -11,5 +11,5 @@ $category = $_POST['category'];
 $sql = "INSERT INTO products (name, category_id, stock_price, price_retail, stocks_onhand, description) VALUES ('$name', '$category', '$stock_price', '$price_retail', '$stocks_onhand', '$description')";
 mysqli_query($conn, $sql);
 
-mysqli_close();
+mysqli_close($conn);
 header('location: ../admin.php');

@@ -11,5 +11,5 @@ $description = $_POST['description'];
 $sql = "UPDATE products SET name = '$name', stock_price='$stock_price', price_retail='$price_retail', stocks_onhand='$stocks_onhand', description='$description' WHERE id='$id'";
 mysqli_query($conn, $sql);
 
-mysqli_close();
+mysqli_close($conn);
 header('location: ../admin.php');

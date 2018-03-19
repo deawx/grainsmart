@@ -110,6 +110,44 @@ if (isset($_GET['msg'])) {
 					                </div>
 					            </div>
 					        </div>
+										<div class="col-md-9">
+										<div class="panel panel-default">
+										  <div class="panel-heading">
+										    <h3 class="panel-title">Registered Customers</h3>
+										  </div>
+										  <div class="panel-body">
+										  	<div class=" text-center">
+										<table class="table table-striped table-responsive">
+											<thead id="stocksTable">
+											<th>Full Name <span><i class="fa fa-sort"></i></span></th>
+											<th>Email Address <span><i class="fa fa-sort"></i></span></th>
+											<th>SMS <span><i class="fa fa-sort"></i></span></th>
+											<th>Email Status <span><i class="fa fa-sort"></i></span></th>
+											</thead>
+											<tbody>
+										<?php
+										$sql = "SELECT * FROM customers";				
+										$result = mysqli_query($conn, $sql);
+
+										while ($customer = mysqli_fetch_assoc($result)) {
+											extract($customer);
+											echo '
+											<tr>
+												<td><a href="customer.php?id='.$id.'">' . $first_name .' '. $last_name . '</a></td>
+												<td>'. $email .'</td>
+												<td>'. $sms .'</td>
+												<td>'. $email_status .'</td>
+											</tr>
+											';
+										}
+
+										?>
+										</tbody>
+										</table>
+									</div>
+								</div> 
+							</div>
+						</div>        
 				</div>
 			</div>
 			<div id="div_settings" class="divy" style="display: none;">

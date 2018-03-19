@@ -32,7 +32,7 @@ include 'partials/head.php';?>
 				<div class="panel panel-default">	
 					<div class="panel-heading"><h4>Order Confirmation</h4></div>
 						<div class="panel-body text-center">
-							<img src="assets/images/check.png" class="img-responsive" width="150" style="margin: auto;"><br>
+							<img src="assets/images/check.gif" class="img-responsive" width="150" style="margin: auto;"><br>
 							<p id="refNumber">Congratulations! Your order is now waiting for confirmation.<br> Please take note of your reference code: <strong><?php echo $message?></strong></p>
 							<p><?php echo $notif?></p>
 						</div> <!-- //.panel-body -->

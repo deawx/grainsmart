@@ -17,11 +17,12 @@ include 'partials/head.php';?>
 </head>
 <body>
 	<!-- main header -->
-	<?php include 'partials/main_header.php'; ?>
+	<?php include 'partials/main_header.php';
+	?>
 
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-4 col-md-4 col-centered">
+			<div class="col-lg-4 col-md-4">
 				<div class="panel panel-default">
 					<div class="panel-heading"><h4>Personal Information</h4></div>
 					<div class="panel-body">
@@ -52,10 +53,7 @@ include 'partials/head.php';?>
 					</div>	
 				</div>
 			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-lg-10 col-md-10 col-centered">
+			<div class="col-lg-8 col-md-8">
 				<div class="panel panel-default">
 					<div class="panel-heading"><h4>Order History</h4></div>
 					<div class="panel-body table-responsive">
@@ -98,7 +96,7 @@ include 'partials/head.php';?>
 					</div>	
 				</div>
 			</div>
-		</div>		
+		</div>	<!-- //.row -->	
 	</div>
 
 	<!-- Edit Modal -->
