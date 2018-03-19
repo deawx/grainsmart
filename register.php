@@ -108,7 +108,7 @@ include 'partials/head.php';?>
 								<input type="submit" name="login" class="btn btn-green btn-block" id="registerBtn" value="Register">
 							</form>
 						</div>
-					<div class="panel-heading">
+					<div class="panel-heading text-right">
 						<div class="alert alert-danger collapse" id="errorAlert">
 							<a id="errorClose" href="#" class="close" data-dismiss="alert">&times;</a>
 							<strong>ERROR!</strong> Please check your form!

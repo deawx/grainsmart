@@ -2,7 +2,14 @@
 session_start();
 require '../connect.php';
 
-if($_GET['ck']==1) {
+if (isset($_GET['ck'])) {
+	$message = $_GET['ck'];
+
+} else {
+	$message = '';
+}
+
+if($message==1) {
 	$_SESSION['fromckout'] = 'checkout';
 }
 
@@ -52,7 +59,7 @@ echo '
 			  			<div class="input-group-addon addon-dif-color">
 							+63
 						</div>
-			  			<input type="number" max="9999999999" class="form-control" name="sms" id="sms" value="'.$sms.'" required>
+			  			<input type="number" max="9999999999" min="9000000000" class="form-control" name="sms" id="sms" value="'.$sms.'" required>
 			  		</div>
 		  		</div>
 

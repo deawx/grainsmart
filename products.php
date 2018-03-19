@@ -41,7 +41,9 @@ include 'partials/head.php';?>
 	<div class="container-fluid">
 		<div class="row">
 	<form method="GET" id="myForm" class="col-lg-3">
-		<h3>Sort: </h3>	
+		<div class="panel panel-default">
+			<div class="panel-heading"><h4>Filter by: </h4></div>
+			<div class="panel-body">
 		<select class="form-control" name="category" onchange="myForm()">
 			<option>All</option>
 			<?php
@@ -55,6 +57,11 @@ include 'partials/head.php';?>
 				}		
 			?>
 		</select>
+	</div>
+	<div class="panel-heading text-right">
+		<p><a href="grocery_bag.php">Check your grocery bag?</a></p>
+	</div>	
+</div>
 	</form>
 
 	<div class="col-lg-9">	
@@ -63,12 +70,12 @@ include 'partials/head.php';?>
 	$result = mysqli_query($conn, $sql);
 	while($product = mysqli_fetch_assoc($result)){
 		extract($product);
-		echo '<div class="card" style="width: 20rem; display: inline-block; margin:20px;">
+		echo '<div class="card text-center" style="width: 20rem; display: inline-block; margin:20px;">
 			<img class="img-responsive" src="'.$product_image.'">
 			<div class="card-block">
 			<h4 class="card-title" id="itemName'.$id.'"><strong>'.$name.'</strong></h4>
-			<div class="card-text">PHP '.$price_retail.'</div>
-			<div><input id="itemQuantity'.$id.'" type="number" name="quantity" value="1" size="4" style="width: 7em" /><input type="submit" value="Add to cart" class="btnAddAction" onclick="addToCart('.$id.')"/></div>
+			<div class="card-text"><h5>PHP '.$price_retail.' per (kg)</h5></div>
+			<div><input class="text-center" id="itemQuantity'.$id.'" type="number" name="quantity" value="1" size="4" style="width: 4em;" /><input type="submit" value="Add to cart" class="btnAddAction" onclick="addToCart('.$id.')"/></div>
 			</div>
 		</div>';
 	}
@@ -103,7 +110,9 @@ include 'partials/head.php';?>
 	 		var quantity = $('#itemQuantity' + id).val();
 	 		var name = $('#itemName' + id).html();
 	 		// console.log(name);
-	 		$.bootstrapGrowl(quantity + " (kg) of " + name + " has successfully added to your cart.");
+	 		$.bootstrapGrowl('<strong><span style="color: red;">'+ quantity + ' (kg)</span></strong> of ' + name + ' has successfully added to your cart.',{
+	 			type: 'warning'
+	 		});
 
 	 		// create a post request to update session cart variable
 	 		$.post('assets/add_to_cart.php',

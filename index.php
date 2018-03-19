@@ -31,18 +31,18 @@ if(!isset($_SESSION['user_id']) && !isset($_SESSION['login_user'])) {
 	<img src="assets/images/grainsmart.gif" style="width: 100%;" height="400">
 	<div class="container">
 		<div class="row">
-		<h2 class="text-center">Best Selling Products</h2>
+		<h2 class="text-center">Featured Products</h2>
 			<?php
 			$sql = "select * from products ORDER BY RAND() limit 6";				
 			$result = mysqli_query($conn, $sql);
 			while($product = mysqli_fetch_assoc($result)){
 				extract($product);
 				echo '<div class="col-lg-2 col-md-4 col-sm-3 col-xs-12">
-				<div class="card" style="width: 20rem; display: inline-block; margin:20px;">
+				<div class="card text-center" style="width: 20rem; display: inline-block; margin:20px;">
 					<img class="img-responsive" src="'.$product_image.'">
 					<div class="card-block">
 					<h4 class="card-title" id="itemName'.$id.'"><strong>'.$name.'</strong></h4>
-					<div class="card-text"><strong><h5>PHP '.$price_retail.'</h5></strong></div>
+					<div class="card-text"><strong><h5>PHP '.$price_retail.' per (kg)</h5></strong></div>
 					</div>
 				</div>
 				</div>';

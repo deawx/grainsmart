@@ -36,9 +36,9 @@ include 'partials/head.php';?>
 							<p id="refNumber">Congratulations! Your order is now waiting for confirmation.<br> Please take note of your reference code: <strong><?php echo $message?></strong></p>
 							<p><?php echo $notif?></p>
 						</div> <!-- //.panel-body -->
-					<div class="panel-heading">
-						<p><a href="products.php">Buy more products?</a></p>
-						<p><a href="track_order.php">Track your order?</a></p>
+					<div class="panel-heading text-right">
+						<p><a href="products.php">Buy more products</a></p>
+						<p><a href="track_order.php">Track your order</a></p>
 					</div>		
 				</div> <!-- //.panel -->
 			</div> <!-- //.col -->
